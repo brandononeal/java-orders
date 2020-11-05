@@ -11,12 +11,19 @@ import org.springframework.transaction.annotation.Transactional;
 public class PaymentServicesImpl implements PaymentServices
 {
     @Autowired
-    PaymentRepository payrepos;
+    PaymentRepository paymentrepos;
 
     @Transactional
     @Override
     public Payment save(Payment payment)
     {
-        return payrepos.save(payment);
+        return paymentrepos.save(payment);
+    }
+
+    @Autowired
+    @Override
+    public void deleteAllPayments()
+    {
+
     }
 }

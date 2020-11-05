@@ -1,6 +1,6 @@
 package com.lambdaschool.orders;
 
-//import com.github.javafaker.Faker;
+// import com.github.javafaker.Faker;
 import com.lambdaschool.orders.models.Agent;
 import com.lambdaschool.orders.models.Customer;
 import com.lambdaschool.orders.models.Order;
@@ -9,6 +9,10 @@ import com.lambdaschool.orders.repositories.AgentRepository;
 import com.lambdaschool.orders.repositories.CustomerRepository;
 import com.lambdaschool.orders.repositories.OrderRepository;
 import com.lambdaschool.orders.repositories.PaymentRepository;
+import com.lambdaschool.orders.services.AgentServices;
+import com.lambdaschool.orders.services.CustomerServices;
+import com.lambdaschool.orders.services.OrderServices;
+import com.lambdaschool.orders.services.PaymentServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -24,6 +28,18 @@ import java.util.Set;
 public class SeedData
     implements CommandLineRunner
 {
+    @Autowired
+    AgentServices agentServices;
+
+    @Autowired
+    CustomerServices customerServices;
+
+    @Autowired
+    OrderServices orderServices;
+
+    @Autowired
+    PaymentServices paymentServices;
+
     /**
      * Connects the customer table to this SeedData method
      */
@@ -67,6 +83,11 @@ public class SeedData
     public void run(String[] args) throws
                                    Exception
     {
+        agentServices.deleteAllAgents();
+        customerServices.deleteAllCustomers();
+        orderServices.deleteAllOrders();
+        paymentServices.deleteAllPayments();
+
         Payment pay1 = new Payment("Cash");
         Payment pay2 = new Payment("Gift Card");
         Payment pay3 = new Payment("Credit Card");
