@@ -1,5 +1,8 @@
 package com.lambdaschool.orders.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,22 +22,42 @@ public class Customer
     private String workingarea;
     private String custcountry;
     private String grade;
+
+    @Transient
+    @JsonIgnore
+    public boolean hasvalueforopeningamt = false;
     private double openingamt;
+
+    @Transient
+    @JsonIgnore
+    public  boolean hasvalueforreceiveamt = false;
     private double receiveamt;
+
+    @Transient
+    @JsonIgnore
+    public boolean hasvalueforpaymentamt = false;
     private double paymentamt;
+
+    @Transient
+    @JsonIgnore
+    public boolean hasvalueforoutstandingamt = false;
     private double outstandingamt;
+
+
     private String phone;
 
     // Agent
     @ManyToOne
     @JoinColumn(name = "agentcode",
         nullable = false)
+    @JsonIgnoreProperties(value = "customers", allowSetters = true)
     private Agent agent;
 
     // Order
     @OneToMany(mappedBy = "customer",
         cascade = CascadeType.ALL,
         orphanRemoval = true)
+    @JsonIgnoreProperties(value = "customer", allowSetters = true)
     private List<Order> orders = new ArrayList<>();
 
     public Customer()
@@ -134,6 +157,7 @@ public class Customer
 
     public void setOpeningamt(double openingamt)
     {
+        hasvalueforopeningamt = true;
         this.openingamt = openingamt;
     }
 
@@ -144,6 +168,7 @@ public class Customer
 
     public void setReceiveamt(double receiveamt)
     {
+        hasvalueforreceiveamt = true;
         this.receiveamt = receiveamt;
     }
 
@@ -154,6 +179,7 @@ public class Customer
 
     public void setPaymentamt(double paymentamt)
     {
+        hasvalueforpaymentamt = true;
         this.paymentamt = paymentamt;
     }
 
@@ -164,6 +190,7 @@ public class Customer
 
     public void setOutstandingamt(double outstandingamt)
     {
+        hasvalueforoutstandingamt = true;
         this.outstandingamt = outstandingamt;
     }
 

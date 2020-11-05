@@ -5,4 +5,6 @@ import com.lambdaschool.orders.models.Payment;
 public interface PaymentServices
 {
     Payment save(Payment payment);
+
+    void deleteAllPayments();
 }
