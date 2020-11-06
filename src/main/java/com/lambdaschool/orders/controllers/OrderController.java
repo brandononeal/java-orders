@@ -52,7 +52,7 @@ public class OrderController
         updateOrder.setOrdnum(ordnum);
         updateOrder = orderServices.save(updateOrder);
 
-        return new ResponseEntity<>(updateOrder, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // http://localhost:2019/orders/order/58
