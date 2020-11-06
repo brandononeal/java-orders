@@ -71,7 +71,7 @@ public class CustomerController
         updateCustomer.setCustcode(custcode);
         updateCustomer = customerServices.save(updateCustomer);
 
-        return new ResponseEntity<>(updateCustomer, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // http://localhost:2019/customers/customer/19
@@ -79,7 +79,7 @@ public class CustomerController
     public ResponseEntity<?> updatePartCustomer(@PathVariable long custcode, @RequestBody Customer updateCustomer)
     {
         updateCustomer = customerServices.update(updateCustomer, custcode);
-        return new ResponseEntity<>(updateCustomer, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // http://localhost:2019/customers/customer/54
